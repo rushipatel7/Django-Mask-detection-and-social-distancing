@@ -1,0 +1,153 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>HOGIST</title>
+    <link rel="stylesheet" href="{% static 'vendors/mdi/css/materialdesignicons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendors/css/vendor.bundle.base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="shortcut icon" href="{% static 'images/logo/HOGIST-mini.jpg' %}">
+            <style>
+          .dropdown .dropdown-menu .dropdown-item:hover {
+              background-color: #f8f9fa;
+              color: black;
+          }
+      </style>
+  </head>
+  <body>
+    <div class="container-scroller">
+      <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+        <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+          <a class="navbar-brand brand-logo" href="index.html">
+{#              <img src="assets/images/logo.svg" alt="logo" />#}
+              <span class="font-weight-bold" style="color: #e80200">HOGIST</span>
+          </a>
+          <a class="navbar-brand brand-logo-mini" href="{% url 'index' %}"><img src="{% static 'images/logo/HOGIST-mini.jpg' %}" width="30px" height="30px" alt="logo" /></a>
+        </div>
+        <div class="navbar-menu-wrapper d-flex align-items-stretch">
+          <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+            <span class="mdi mdi-menu"></span>
+          </button>
+          <div class="search-field d-none d-md-block">
+            <form class="d-flex align-items-center h-100" action="#">
+              <div class="input-group">
+                <div class="input-group-prepend bg-transparent">
+                  <i class="input-group-text border-0 mdi mdi-magnify"></i>
+                </div>
+                <input type="text" class="form-control bg-transparent border-0" placeholder="Search projects">
+              </div>
+            </form>
+          </div>
+          <ul class="navbar-nav navbar-nav-right">
+            <li class="nav-item nav-profile dropdown">
+                {% if user.is_authenticated %}
+              <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+                  <div class = "nav-profile-text">
+                    <p class="mb-0 text-black font-weight-bold" href="{% url 'login' %}">
+                      Hi, {{ user.username }} !
+                    </p>
+                  </div>
+                </a>
+                  <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
+                    <a class="dropdown-item" href="{% url 'logout' %}">
+                    <i class="mdi mdi-logout mr-2 text-info"></i> Signout </a>
+                  </div>
+              {% else %}
+                <a class="font-weight-bold h4 mr-3 text-black" href="{% url 'login' %}">
+                  <i class="mr-2 mb-3 text-info"></i>
+                      Login
+                </a>
+              {% endif %}
+            </li>
+            <li class="nav-item nav-logout d-none d-lg-block">
+              <a class="nav-link" href="#" onclick="window.close();">
+                <i class="mdi mdi-power" ></i>
+              </a>
+            </li>
+          </ul>
+          <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+            <span class="mdi mdi-menu"></span>
+          </button>
+        </div>
+      </nav>
+      <!-- partial -->
+      <div class="container-fluid page-body-wrapper">
+        <!-- partial:partials/_sidebar.html -->
+        <nav class="sidebar sidebar-offcanvas" id="sidebar">
+          <ul class="nav">
+            <li class="nav-item nav-profile">
+              <a href="#" class="nav-link">
+                <div class="nav-profile-image">
+                  <img src="{% static 'images/faces/user2.png' %}" alt="profile">
+                  <span class="login-status online"></span>
+                  <!--change to offline or busy as needed-->
+                </div>
+                <div class="nav-profile-text d-flex flex-column">
+                  <span class="font-weight-bold mb-2">{{ user.first_name }} {{ user.last_name }}</span>
+                    {% if user.is_staff %}
+                        <span class="text-secondary text-small">User</span>
+                        {% else %}
+                          <span class="text-secondary text-small">Admin</span>
+                    {% endif %}
+                </div>
+                <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'index' %}">
+                <span class="font-weight-bold">Dashboard</span>
+{#                <i class="mdi mdi-home menu-icon"></i>#}
+              </a>
+            </li>
+
+
+              <li class="nav-item">
+              <a class="nav-link" data-toggle="collapse" href="#page-layouts" aria-expanded="false" aria-controls="page-layouts">
+                <span class="menu-title font-weight-bold">Camera View</span>
+                <i class="menu-arrow"></i>
+              </a>
+              <div class="collapse" id="page-layouts">
+                <ul class="nav flex-column sub-menu">
+                  <li class="nav-item"> <a class="nav-link" href="{% url 'Mask-streaming' %}">Mask Detection</a></li>
+                  <li class="nav-item"> <a class="nav-link" href="{% url 'social-streaming' %}">Social Distancing</a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+
+              <li class="nav-item">
+                  <a class="nav-link" href="{% url 'user_setting' %}">
+                      <span class="font-weight-bold">Settings</span>
+                  </a>
+              </li>
+
+          </ul>
+        </nav>
+        <!-- partial -->
+        <div class="main-panel">
+          <div class="content-wrapper">
+            <div class="page-header">
+              <h3 class="page-title">
+                <span class="page-title-icon  text-white mr-2" style="background-color: #e80200">
+                  <i class="mdi mdi-home"></i>
+                </span> Dashboard </h3>
+              <nav aria-label="breadcrumb">
+                <ul class="breadcrumb">
+                  <li class="breadcrumb-item active" aria-current="page">
+                    <span></span>Overview <i class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+    </div>
+    <script src="{% static 'vendors/js/vendor.bundle.base.js' %}"></script>
+    <script src="{% static 'vendors/chart.js/Chart.min.js' %}"></script>
+    <script src="{% static 'js/off-canvas.js' %}"></script>
+    <script src="{% static 'js/hoverable-collapse.js' %}"></script>
+    <script src="{% static 'js/misc.js' %}"></script>
+    <script src="{% static 'js/dashboard.js' %}"></script>
+    <script src="{% static 'js/todolist.js' %}"></script>
+  </body>
+</html>

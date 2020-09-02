@@ -1,0 +1,254 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>HOGIST</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="{% static 'vendors/mdi/css/materialdesignicons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendors/css/vendor.bundle.base.css' %}">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- Layout styles -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!-- End layout styles -->
+    <link rel="shortcut icon" href="{% static 'images/logo/HOGIST-mini.jpg' %}">
+      <style>
+          .dropdown .dropdown-menu .dropdown-item:hover {
+              background-color: #f8f9fa;
+              color: black;
+          }
+      </style>
+  </head>
+  <body>
+    <div class="container-scroller">
+      <!-- partial:partials/_navbar.html -->
+      <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+        <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+          <a class="navbar-brand brand-logo" href="{% url 'index' %}">
+{#              <img src="assets/images/logo.svg" alt="logo" />#}
+              <span class="font-weight-bold" style="color: #e80200">HOGIST</span>
+          </a>
+          <a class="navbar-brand brand-logo-mini" href="{% url 'index' %}"><img src="{% static 'images/logo/HOGIST-mini.jpg' %}" width="30px" height="30px" alt="logo" /></a>
+        </div>
+        <div class="navbar-menu-wrapper d-flex align-items-stretch">
+          <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+            <span class="mdi mdi-menu"></span>
+          </button>
+          <ul class="navbar-nav navbar-nav-right">
+            <li class="nav-item nav-profile dropdown">
+                {% if user.is_authenticated %}
+              <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+                  <div class = "nav-profile-text">
+                    <p class="mb-0 text-black font-weight-bold" href="{% url 'login' %}">
+                      Hi, {{ user.username }} !
+                    </p>
+                  </div>
+                </a>
+                  <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
+                    <a class="dropdown-item" href="{% url 'logout' %}">
+                    <i class="mdi mdi-logout mr-2 text-info"></i> Signout </a>
+                  </div>
+              {% else %}
+                <a class="font-weight-bold h4 mr-3 text-black" href="{% url 'login' %}">
+                  <i class="mr-2 mb-3 text-info"></i>
+                      Login
+                </a>
+              {% endif %}
+            </li>
+            <li class="nav-item nav-logout d-none d-lg-block">
+              <a class="nav-link" href="#" onclick="window.close();">
+                <i class="mdi mdi-power" ></i>
+              </a>
+            </li>
+          </ul>
+          <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+            <span class="mdi mdi-menu"></span>
+          </button>
+        </div>
+      </nav>
+      <!-- partial -->
+      <div class="container-fluid page-body-wrapper">
+        <!-- partial:partials/_sidebar.html -->
+        <nav class="sidebar sidebar-offcanvas" id="sidebar">
+          <ul class="nav">
+            <li class="nav-item nav-profile">
+              <a href="#" class="nav-link">
+                <div class="nav-profile-image">
+                  <img src="{% static 'images/faces/user2.png' %}" alt="profile">
+                  <span class="login-status online"></span>
+                  <!--change to offline or busy as needed-->
+                </div>
+                <div class="nav-profile-text d-flex flex-column">
+                  <span class="font-weight-bold mb-2">{{ user.first_name }} {{ user.last_name }}</span>
+                    {% if user.is_staff %}
+                        <span class="text-secondary text-small">User</span>
+                        {% else %}
+                          <span class="text-secondary text-small">Admin</span>
+                    {% endif %}
+                </div>
+                <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'index' %}">
+                <span class="font-weight-bold">Dashboard</span>
+{#                <i class="mdi mdi-home menu-icon"></i>#}
+              </a>
+            </li>
+              <li class="nav-item">
+              <a class="nav-link" data-toggle="collapse" href="#page-layouts" aria-expanded="false" aria-controls="page-layouts">
+                <span class="menu-title font-weight-bold">Camera View</span>
+                <i class="menu-arrow"></i>
+              </a>
+              <div class="collapse" id="page-layouts">
+                <ul class="nav flex-column sub-menu">
+                  <li class="nav-item"> <a class="nav-link" href="{% url 'mask_detection' %}">Mask Detection</a></li>
+                  <li class="nav-item"> <a class="nav-link" href="{% url 'social_detection' %}">Social Distancing</a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+
+
+
+              <li class="nav-item">
+                  <a class="nav-link" href="{% url 'user_setting' %}">
+                      <span class="font-weight-bold">Settings</span>
+                  </a>
+              </li>
+          </ul>
+        </nav>
+        <!-- partial -->
+         <div class="main-panel">
+            <div class="content-wrapper">
+                    <div class="row">
+                    <div class="col-12 grid-margin">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title font-weight-bold">My Details</h4><br><br>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                       <tr>
+                                            <td><h6>Email Address</h6></td>
+                                            <td><p>{{ email }}</p></td>
+                                        </tr>
+                                        <tr>
+                                            <td><h6>Username</h6></td>
+                                            <td><p>{{ username }}</p></td>
+                                        </tr>
+                                        <tr>
+                                            <td><h6>First Name</h6></td>
+                                            <td><p>{{ first_name }}</p></td>
+                                        </tr>
+                                        <tr>
+                                            <td><h6>Last Name</h6></td>
+                                            <td><p>{{ last_name }}</p></td>
+                                        </tr>
+                                        <tr>
+                                            <td><h6>Company Name</h6></td>
+                                            <td><p>{{ company_name }}</p></td>
+                                        </tr>
+                                        <tr>
+                                            <td><h6>Mobile Number</h6></td>
+                                            <td><p>{{ mobile_number }}</p></td>
+                                        </tr>
+{#                                        <tr>#}
+{#                                            <td><h6>Last login</h6></td>#}
+{#                                            <td><p>{{ last_login }}</p></td>#}
+{#                                        </tr>#}
+{#                                        <tr>#}
+{#                                            <td><h6>Created at</h6></td>#}
+{#                                            <td><p>{{ created_at }}</p></td>#}
+{#                                        </tr>#}
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 grid-margin">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title font-weight-bold">Account Settings</h4><br><br>
+                                <div class="table-responsive">
+                                    <form action="{% url 'change_password' %}" method="post">
+                                        {% csrf_token %}
+                                        <table class="table">
+                                           <tr>
+                                                <td><h6>Change Password</h6></td>
+                                               <td><button class="btn btn-danger" onclick="window.location.href='{% url 'change_password' %}'">Change Password</button></td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+{#            <div class="form-popup" id="myForm">#}
+{#                <form action="/admin_index/" method="post" class="form-container">#}
+{#                    {% csrf_token %}#}
+{#                    <h1>Add As Admin</h1>#}
+{##}
+{#                    <label for="email"><b>Email</b></label>#}
+{#                    <input type="text" placeholder="Enter Email" name="addAdminEmail" required>#}
+{##}
+{#                    <label for="psw"><b>Password</b></label>#}
+{#                    <input type="password" placeholder="Enter Password" name="psw" required>#}
+{##}
+{#                    <button type="submit" class="btn">Make Admin</button>#}
+{#                    <span class="close"></span>#}
+{#                    <button type="button" class="btn cancel" onclick="closeForm()">Close</button>#}
+{#                </form>#}
+{#            </div>#}
+{#            <script>#}
+{#                function openForm() {#}
+{#                    document.getElementById("myForm").style.display = "block";#}
+{#                }#}
+{##}
+{#                function closeForm() {#}
+{#                    document.getElementById("myForm").style.display = "none";#}
+{#                }#}
+{#            </script>#}
+            <!-- content-wrapper ends -->
+            <!-- partial:partials/_footer.html -->
+            {#          <footer class="footer">#}
+            {#            <div class="d-sm-flex justify-content-center justify-content-sm-between">#}
+            {#              <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2017 <a href="https://www.bootstrapdash.com/" target="_blank">BootstrapDash</a>. All rights reserved.</span>#}
+            {#              <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="mdi mdi-heart text-danger"></i></span>#}
+            {#            </div>#}
+            {#          </footer>#}
+            <!-- partial -->
+        </div>
+        <!-- main-panel ends -->
+      </div>
+      <!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller -->
+    <!-- plugins:js -->
+
+    <script src="{% static 'vendors/js/vendor.bundle.base.js' %}"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <script src="{% static 'vendors/chart.js/Chart.min.js' %}"></script>
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="{% static 'js/off-canvas.js' %}"></script>
+    <script src="{% static 'js/hoverable-collapse.js' %}"></script>
+    <script src="{% static 'js/misc.js' %}"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page -->
+    <script src="{% static 'js/dashboard.js' %}"></script>
+    <script src="{% static 'js/todolist.js' %}"></script>
+    <!-- End custom js for this page -->
+  </body>
+</html>

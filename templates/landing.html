@@ -1,0 +1,326 @@
+{% load static %}
+<html>
+<head>
+    <title>Hogist</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'vendors/mdi/css/materialdesignicons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendors/css/vendor.bundle.base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="shortcut icon" href="{% static 'images/logo/HOGIST-mini.jpg' %}">
+    <style>
+        .img-center {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 100%;
+            height: auto;
+            position: relative;
+            max-width: 100%;
+        {#               background-position: center;#}{#background-repeat: no-repeat;#}{#background-size: cover;#}
+        }
+    </style>
+</head>
+
+<body>
+<nav class="navbar navbar-light navbar-expand-md" style="background-color: #e80200">
+    <div class="container-fluid">
+        <img src="{% static 'images/logo/HOGIST-mini.jpg' %}" width="30px" height="30px" alt="logo"/>
+        <a class="navbar-brand font-weight-bold text-white" href="#">HOGIST</a>
+        <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span
+                class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse d-flex float-right justify-content-md-end justify-content-lg-end"
+             id="navcol-1">
+            <ul class="nav navbar-nav actions">
+                <li class="nav-item" role="presentation"><a class="nav-link font-weight-bold text-white"
+                                                            href="{% url 'login' %}">LOGIN</a></li>
+                {#                    <li class="nav-item" role="presentation"><a class="nav-link font-weight-bold text-white" href="{% url 'signup' %}">SIGN UP</a></li>#}
+                <li class="nav-item" role="presentation"><a class="nav-link font-weight-bold text-white"
+                                                            href="">ABOUT</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link font-weight-bold text-white" href="">CONTACT
+                    US</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container-scroller">
+    <div class="banner-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    {#              <nav class="navbar navbar-expand-lg">#}
+                    {#                <a class="navbar-brand" href="../../index.html"><img src="../../../assets/images/logo.svg" alt=""></a>#}
+                    {#                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">#}
+                    {#                  <span class="mdi mdi-menu"></span>#}
+                    {#                </button>#}
+                    {#                <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">#}
+                    {#                  <ul class="navbar-nav">#}
+                    {#                    <li class="nav-item active">#}
+                    {#                      <a class="nav-link" href="#">HOME</a>#}
+                    {#                    </li>#}
+                    {#                    <li class="nav-item">#}
+                    {#                      <a class="nav-link" href="#">PRICING</a>#}
+                    {#                    </li>#}
+                    {#                    <li class="nav-item">#}
+                    {#                      <a class="nav-link" href="#">CONTACT</a>#}
+                    {#                    </li>#}
+                    {#                  </ul>#}
+                    {#                </div>#}
+                    {#              </nav>#}
+                </div>
+            </div>
+            <div class="row py-0 py-sm-5">
+                <div class="col-lg-7 banner-content">
+                    <br><br><br><br><br><br>
+                    <h1 class="mr-2 text-black"> Social Distancing and Mask Detection </h1>
+                    <h3 class=" text-black pt-2 pb-5">Face Mask Detection System uses existing IP cameras and CCTV
+                        cameras
+                        combined with Computer Vision to detect people without masks</h3>
+                    {#                <div style="background-image: url('../static/images/landing/bg1.jpg') "></div>#}
+                    <div class="my-5">
+                        <button class="btn btn-primary btn-lg mr-2 mb-3 " style="background-color:#e80200 "
+                                onclick="window.location.href= '{% url 'login' %}'">Sign In
+                        </button>
+                        {#                <button class="btn btn-danger btn-lg ml-2 mb-3">BUY NOW</button>#}
+                    </div>
+                </div>
+                {#              <div class="col-lg-5">#}
+                {#                  <br><br><br><br><br><br>#}
+                {#                  <div class="">#}
+                {#                      <img src="{% static 'images/landing/bg1.jpg' %}" height="40%">#}
+                {#                  </div>#}
+                {#              </div>#}
+            </div>
+        </div>
+    </div>
+    <div class="details-wrapper">
+        <div class="container">
+            {#          <div class="row">#}
+            {#            <div class="col-sm-4 pb-3">#}
+            {#              <div class="card card-icon-top">#}
+            {#                <div class="card-body text-center">#}
+            {#                  <img src="../../../assets/images/samples/bootstrap-stack.png" alt="image" class="card-icon">#}
+            {#                  <h4>Bootstrap 4</h4>#}
+            {#                  <p class="card-text"> Bootstrap is an open source toolkit for developing with HTML, CSS, and JS. </p>#}
+            {#                </div>#}
+            {#              </div>#}
+            {#            </div>#}
+            {#            <div class="col-sm-4 pb-3">#}
+            {#              <div class="card card-icon-top">#}
+            {#                <div class="card-body text-center">#}
+            {#                  <img src="../../../assets/images/samples/angular-4.png" alt="image" class="card-icon">#}
+            {#                  <h4>Angular 5</h4>#}
+            {#                  <p class="card-text"> Angular is a platform that makes it easy to build applications with the web. </p>#}
+            {#                </div>#}
+            {#              </div>#}
+            {#            </div>#}
+            {#            <div class="col-sm-4 pb-3">#}
+            {#              <div class="card card-icon-top">#}
+            {#                <div class="card-body text-center">#}
+            {#                  <img src="../../../assets/images/samples/html5.png" alt="image" class="card-icon">#}
+            {#                  <h4>Static HTML</h4>#}
+            {#                  <p class="card-text"> This is built with Jquery and static HTML that can be integrated to any framewroks </p>#}
+            {#                </div>#}
+            {#              </div>#}
+            {#            </div>#}
+            {#          </div>#}
+            <div class="row mt-5 mb-5">
+                <div class="col-md mx-auto py-5 text-center">
+                    <h1>How does it work?</h1><br><br>
+                    <img src="{% static 'images/landing/HowItWorks-1.svg' %}" class="img-center">
+                </div>
+            </div>
+            <br><br><br><br><br><br><br><br>
+            <h1 class="text-center">Feature of Face Mask Detection System</h1>
+            <br><br><br><br>
+            <div class="row">
+
+                <div class="col-sm-4">
+                    <div class="card card-icon-top">
+                        <div class="card-body text-left">
+                            <img src="{% static 'images/landing/IoT-enabled-Security-Cameras.png' %}" style=""><br><br>
+                            <b class="font-weight-bold">Automatically Send Alert</b><br><br>
+                            <p class="card-text font-weight-light">Send alert to the faces which are recognized, also
+                                set the rate of sending the alerts and detection of faces. </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="card card-icon-top">
+                        <div class="card-body text-left">
+                            <img src="{% static 'images/landing/View-Your-Staff-Profile.png ' %}"><br><br>
+                            <b class="font-weight-bold">Multi-Channel Recognition</b><br><br>
+                            <p class="card-text font-weight-light">Attach multiple cameras in a few minutes and enable
+                                all the cameras to access the AI capability of recognizing faces. <br><br></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="card card-icon-top">
+                        <div class="card-body text-left">
+                            <img src="{% static 'images/landing/NoNewHardware.png' %}"><br><br>
+                            <b class="font-weight-bold">No new hardware to install</b><br><br>
+                            <p class="card-text font-weight-light">The system can work on any existing RTSP and IP
+                                camera without the installation of any new cameras. Most of the hospitals and airports
+                                have IP cameras installed and RTSP-enabled.<br><br><br></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br><br><br><br><br>
+        </div>
+    </div>
+    <footer class="" style="background-color: #000000">
+        <div class="pt-4">
+            <div class="container">
+                <div class="row border-bottom">
+                    <div class="col-md-3 ">
+                        <div class="text-white font-weight-bold">
+                            Company <br><br><br>
+                            <div class="text-white font-weight-normal">
+                                Our Story <br><br>
+                                Careers <br><br>
+                                Blog <br><br>
+                                FAQ <br><br>
+                                Services Offered <br><br>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-white font-weight-bold">
+                            Legal <br><br><br>
+                            <div class="text-white font-weight-normal">
+                                Become a Vendor <br><br>
+                                Become a Consultant <br><br>
+                                Privacy Policy <br><br>
+                                Terms & Conditions <br><br>
+                                Refunds & Cancellation <br><br>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="text-white font-weight-bold">
+                            Contact <br><br><br>
+                            <div class="text-white font-weight-normal">
+                                <i class="mdi mdi-map-marker f34d"></i> &nbsp; &nbsp; &nbsp;
+                                HOGIST TECHNOLOGIES PVT. LTD.
+                                Regus Business Center, KRM Plaza, 8th Floor, South Tower, 2 Harrington Road, Chetpet,
+                                Chennai – 600031 <br><br>
+                                <i class="mdi mdi-phone"></i> &nbsp; &nbsp; &nbsp;
+                                Toll Free: +91 - 9863702703 <br><br>
+                                <i class="mdi mdi-email-open-outline"></i> &nbsp; &nbsp; &nbsp;
+                                support@hogist.com
+                            </div>
+                        </div>
+                    </div>
+                    {#                <div class="table-responsive">#}
+                    {#                    <table>#}
+                    {#                        <tr>#}
+                    {#                            <td>Company</td>#}
+                    {#                            <td>Legal</td>#}
+                    {#                            <td>Contact</td>#}
+                    {#                        </tr>#}
+                    {#                    </table>#}
+                    {#                </div>#}
+                    {#              <div class="col-lg-4">#}
+                    {#                <img class="img-fluid" src="../../../assets/images/logo.svg" alt="">#}
+                    {#                <div class="d-flex pt-5 pb-5">#}
+                    {#                  <div class="social-icons bg-info text-white"><span class="mdi mdi-facebook"></span></div>#}
+                    {#                  <div class="social-icons bg-secondary text-white"><span class="mdi mdi-pinterest"></span></div>#}
+                    {#                  <div class="social-icons bg-danger text-white"><span class="mdi mdi-dribbble"></span></div>#}
+                    {#                  <div class="social-icons bg-info text-white"><span class="mdi mdi-twitter"></span></div>#}
+                    {#                </div>#}
+                    {#              </div>#}
+                    {#              <div class="col-lg-5">#}
+                    {#                <div class="d-flex">#}
+                    {#                  <i class="mdi mdi-cellphone-android"></i>#}
+                    {#                  <h6 class="font-weight-normal">(0000) 1234 5678</h6>#}
+                    {#                </div>#}
+                    {#                <div class="d-flex">#}
+                    {#                  <i class="mdi mdi-settings"></i>#}
+                    {#                  <h6 class="font-weight-normal">support@staradmin.org</h6>#}
+                    {#                </div>#}
+                    {#                <ul class="nav mt-3">#}
+                    {#                  <li class="nav-item">#}
+                    {#                    <a class="nav-link pl-0" href="#">Demos</a>#}
+                    {#                  </li>#}
+                    {#                  <li class="nav-item">#}
+                    {#                    <a class="nav-link" href="#">Features</a>#}
+                    {#                  </li>#}
+                    {#                  <li class="nav-item">#}
+                    {#                    <a class="nav-link" href="#">Support</a>#}
+                    {#                  </li>#}
+                    {#                  <li class="nav-item">#}
+                    {#                    <a class="nav-link" href="#">Documentation</a>#}
+                    {#                  </li>#}
+                    {#                </ul>#}
+                    {#              </div>#}
+                    {#              <div class="col-lg-3">#}
+                    {#                <h3 class="text-white">Newsletter</h3>#}
+                    {#                <p>To get the latest news from us please subscribe your email.</p>#}
+                    {#                <div class="mt-3">#}
+                    {#                  <input type="email" class="form-control mb-2" placeholder="Enter your email"> </div>#}
+                    {#              </div>#}
+                </div>
+                <br>
+                <div class="row justify-content-center">
+                    <div class="text-white font-weight-bold">
+                        Disclaimer
+                    </div>
+                </div><br><br>
+                <div class="row">
+                    <div class="text-white font-weight-normal ">
+                        <p style="font-size: smaller; word-spacing: 1px">
+                            Product offers and availability are subject to change. All prices are inclusive of taxes.
+                            Product
+                            colour & images are only for illustration and they may not exactly match with the actual
+                            product.Product quantity & taste are subject to change & may vary from actual product.
+                            Subject
+                            to
+                            change as per customer preference, if any While every care is taken to avoid inaccuracies,
+                            these
+                            are
+                            provided as is, without warranty of any kind.
+                        </p>
+                    </div>
+                    <br><br>
+                </div>
+                <div class="row justify-content-between">
+                    <div class="banner-image">
+                        <img src="{% static 'images/landing/footer_logo.png' %}" width="175px" height="43px">
+                    </div>
+                    <div class="text-white font-weight-normal">
+                        © 2020 Copyright Hogist
+                    </div>
+                    <div class="btn-social-icon">
+                        <a class="fa fa-facebook text-white" style="font-size: 30px" href="https://www.facebook.com/hogisttechnologies/"></a> &nbsp; &nbsp;
+                        <a class="fa fa-twitter text-white" style="font-size: 30px" href="https://twitter.com/Hogistindia"></a>&nbsp; &nbsp;
+                        <a class="fa fa-linkedin text-white" style="font-size: 30px" href="https://www.linkedin.com/company/hogist/"></a>&nbsp; &nbsp;
+                        <a class="fa fa-youtube text-white" style="font-size: 30px" href="https://www.youtube.com/channel/UCAPbd4AmSzV0q9LcEh_5ahA"></a>&nbsp; &nbsp;
+                        <a class="fa fa-instagram text-white" style="font-size: 30px" href="https://www.instagram.com/hogistindia/?utm_source=ig_embed&utm_campaign=loading"></a>&nbsp; &nbsp;
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</div>
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+    var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+    (function () {
+        var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+        s1.async = true;
+        s1.src = 'https://embed.tawk.to/5f3d75b61e7ade5df4424eb9/default';
+        s1.charset = 'UTF-8';
+        s1.setAttribute('crossorigin', '*');
+        s0.parentNode.insertBefore(s1, s0);
+    })();
+</script>
+<script src="{% static 'vendors/js/vendor.bundle.base.js' %}"></script>
+<script src="{% static 'js/off-canvas.js' %}"></script>
+<script src="{% static 'js/hoverable-collapse.js' %}"></script>
+<script src="{% static 'js/misc.js' %}"></script>
+<script src="{% static 'js/settings.js' %}"></script>
+<script src="{% static 'js/todolist.js' %}"></script>
+</body>
+</html>

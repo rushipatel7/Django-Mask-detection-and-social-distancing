@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="hogist" uuid="c92fff06-3856-4c48-9f0f-0863892208dd">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://127.0.0.1:5432/hogist2</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="hogist aws" uuid="5026502b-82b3-44d8-bb77-d11afd416e55">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://ls-0438f08a704227d445cfa8ff64e4f7df8e84bb1e.cu81vx4tdqjc.ap-south-1.rds.amazonaws.com:5432/dbaimaster</jdbc-url>
+    </data-source>
+  </component>
+</project>

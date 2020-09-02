@@ -1,0 +1,561 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>HOGIST</title>
+    <link rel="stylesheet" href="{% static 'vendors/mdi/css/materialdesignicons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendors/css/vendor.bundle.base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="shortcut icon" href="{% static 'images/logo/HOGIST-mini.jpg' %}">
+    <style>
+        .dropdown .dropdown-menu .dropdown-item:hover {
+            background-color: #f8f9fa;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+<div class="container-scroller">
+    <!-- partial:partials/_navbar.html -->
+    <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+        <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+            <a class="navbar-brand brand-logo" href="{% url 'index' %}">
+                <span class="font-weight-bold" style="color: #e80200">HOGIST</span>
+            </a>
+            <a class="navbar-brand brand-logo-mini" href="{% url 'index' %}"><img
+                    src="{% static 'images/logo/HOGIST-mini.jpg' %}" width="30px" height="30px" alt="logo"/></a>
+        </div>
+        <div class="navbar-menu-wrapper d-flex align-items-stretch">
+            <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+                <span class="mdi mdi-menu"></span>
+            </button>
+
+            <ul class="navbar-nav navbar-nav-right">
+                <li class="nav-item nav-profile dropdown">
+                    {% if user.is_authenticated %}
+                        <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown"
+                           aria-expanded="false">
+                            <div class="nav-profile-text">
+                                <p class="mb-0 text-black font-weight-bold" href="{% url 'login' %}">
+                                    Hi, {{ user.username }} !
+                                </p>
+                            </div>
+                        </a>
+                        <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
+                            <a class="dropdown-item" href="{% url 'logout' %}">
+                                <i class="mdi mdi-logout mr-2 text-info"></i> Signout </a>
+                        </div>
+                    {% else %}
+                        <a class="font-weight-bold h4 mr-3 text-black" href="{% url 'login' %}">
+                            <i class="mr-2 mb-3 text-info"></i>
+                            Login
+                        </a>
+                    {% endif %}
+                </li>
+{#                <li class="nav-item nav-logout d-none d-lg-block">#}
+{#                    <a class="nav-link" href="#" onclick="window.close();">#}
+{#                        <i class="mdi mdi-power"></i>#}
+{#                    </a>#}
+{#                </li>#}
+            </ul>
+            <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
+                    data-toggle="offcanvas">
+                <span class="mdi mdi-menu"></span>
+            </button>
+        </div>
+    </nav>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+        <!-- partial:partials/_sidebar.html -->
+        <nav class="sidebar sidebar-offcanvas" id="sidebar">
+            <ul class="nav">
+                <li class="nav-item nav-profile">
+                    <a href="#" class="nav-link">
+                        <div class="nav-profile-image">
+                            <img src="{% static 'images/faces/user2.png' %}" alt="profile">
+                            <span class="login-status online"></span>
+                            <!--change to offline or busy as needed-->
+                        </div>
+                        <div class="nav-profile-text d-flex flex-column">
+                            <span class="font-weight-bold mb-2">{{ user.first_name }} {{ user.last_name }}</span>
+                            {% if user.is_staff %}
+                                <span class="text-secondary text-small">User</span>
+                            {% else %}
+                                <span class="text-secondary text-small">Admin</span>
+                            {% endif %}
+                        </div>
+                        <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'index' %}">
+                        <span class="font-weight-bold">Dashboard</span>
+                        {#                <i class="mdi mdi-home menu-icon"></i>#}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="collapse" href="#page-layouts" aria-expanded="false"
+                       aria-controls="page-layouts">
+                        <span class="menu-title font-weight-bold">Camera View</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="page-layouts">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"><a class="nav-link" href="{% url 'mask_detection' %}">Mask
+                                Detection</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'social_detection' %}">Social
+                                Distancing</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'user_setting' %}">
+                        <span class="font-weight-bold">Settings</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <!-- partial -->
+
+        <div class="main-panel">
+            <div class="content-wrapper" id="refresh-div">
+                <div class="page-header">
+                    <h3 class="page-title">
+                <span class="page-title-icon  text-white mr-2" style="background-color: #e80200">
+                  <i class="mdi mdi-home"></i>
+                </span> Dashboard </h3>
+                    <nav aria-label="breadcrumb">
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item active" aria-current="page">
+                                <span></span>Overview <i
+                                    class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-6 grid-margin">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title font-weight-bold"></h4>
+                                <div class="table">
+                                    <canvas id="bar-mask-chart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 grid-margin">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title font-weight-bold"></h4>
+                                <div class="table">
+                                    {#                                   <canvas id="pie-chart"></canvas>#}
+                                    <canvas id="bar-nomask-chart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6 grid-margin">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title font-weight-bold"></h4>
+                                <div class="table">
+                                    {#                                     <canvas id="bar-nomask-chart"></canvas>#}
+                                    <canvas id="bar-mix-chart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 grid-margin">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title font-weight-bold"></h4>
+                                <div class="table">
+                                    {#                                   <canvas id="bar-mix-chart"></canvas>#}
+                                    <canvas id="bar-social-chart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="container" style="width: 50%;">
+                {#                                            <canvas id="pie-chart"></canvas>#}
+            </div>
+            <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+                    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+            <script>
+
+                var config = {
+                    {#horizontalBar#}
+                    type: 'pie',
+                    data: {
+                        datasets: [{
+                            data: [{{ mask_count|safe }}, {{ no_mask_count|safe }}],
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.5)',
+                                'rgba(54, 162, 235, 0.5)',
+                                'rgba(255, 206, 86, 0.5)',
+                                'rgba(75, 192, 192, 0.5)',
+                            ],
+                            borderColor: [
+                                'rgba(255,99,132,1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                            ],
+                            borderWidth: 0.4,
+                            label: 'Mask'
+                        }],
+
+
+                        labels: [
+                            'Mask',
+                            'Without Mask'
+                        ]
+                    },
+                    options: {
+                        scales: {
+                            {#xAxes:[{#}
+                            {#    barPercentage: 0.4,#}
+                            {#    ticks:{#}
+                            {#       beginAtZero: true,#}
+                            {#    },#}
+                            {#    gridLines:{#}
+                            {#        display: false#}
+                            {#    }#}
+                            {# }]#}
+                        },
+                        responsive: true,
+                        legend: {
+                            position: 'top',
+                        },
+                        title: {
+                            display: true,
+                            text: 'With Mask and Without Mask data Per Day'
+                        }
+                    }
+                };
+
+                {#window.onload = function () {#}
+                {#    var ctx = document.getElementById('pie-chart').getContext('2d');#}
+                {#    window.myPie = new Chart(ctx, config);#}
+                {# };#}
+
+
+                var config1 = {
+                    {#horizontalBar#}
+                    type: 'bar',
+                    data: {
+                        datasets: [{
+                            data: [{{ mask_mon|safe }}, {{ mask_tue|safe }}, {{ mask_wed }}, {{ mask_thu }}, {{ mask_fri }}, {{ mask_sat }}, {{ mask_sun }}],
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.5)',
+                                'rgba(54, 162, 235, 0.5)',
+                                'rgba(255, 206, 86, 0.5)',
+                                'rgba(75, 192, 192, 0.5)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(255, 159, 64, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgba(255,99,132,1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+                            ],
+                            {#label: 'Mask',#}
+                        }],
+
+
+                        labels: [
+                            'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'
+                        ]
+                    },
+                    options: {
+                        scales: {
+                            xAxes: [{
+                                barPercentage: 0.4,
+                                ticks: {
+                                    beginAtZero: true,
+                                },
+                                gridLines: {
+                                    display: false
+                                }
+                            }]
+                        },
+                        responsive: true,
+                        legend: {
+                            position: 'top',
+                            display: false // Lable hide krva
+                        },
+                        title: {
+                            display: true,
+                            text: 'Only Mask Wearing Data Per Week'
+                        }
+                    }
+                };
+
+                var config2 = {
+                    {#horizontalBar#}
+                    type: 'bar',
+                    data: {
+                        datasets: [{
+                            data: [{{ nomask_mon|safe }}, {{ nomask_tue|safe }}, {{ nomask_wed|safe }}, {{ nomask_thu|safe }}, {{ nomask_fri|safe }}, {{ nomask_sat|safe }}, {{ nomask_sun|safe }}],
+                            backgroundColor: [
+                                'rgba(54, 162, 235, 0.5)',
+                                'rgba(255, 99, 132, 0.5)',
+                                'rgba(75, 192, 192, 0.5)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(255, 206, 86, 0.5)',
+                                'rgba(255, 159, 64, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255,99,132,1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(255, 159, 64, 1)'
+                            ],
+                            {#label: 'Mask',#}
+                        }],
+
+
+                        labels: [
+                            'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'
+                        ]
+                    },
+                    options: {
+                        scales: {
+                            xAxes: [{
+                                barPercentage: 0.4,
+                                ticks: {
+                                    beginAtZero: true,
+                                },
+                                gridLines: {
+                                    display: false
+                                }
+                            }]
+                        },
+                        responsive: true,
+                        legend: {
+                            position: 'top',
+                            display: false // Lable hide krva
+                        },
+                        title: {
+                            display: true,
+                            text: 'No Mask Wearing Data Per Week'
+                        }
+                    }
+                };
+
+                let start = new Date(),
+                    end = new Date();
+
+                start.setDate(start.getDay() - 7); // set to 'now' minus 7 days.
+                start.setHours(0, 0, 0, 0); // set to midnight.
+                var config3 = {
+                    {#horizontalBar#}
+                    type: 'line',
+                    data: {
+                        datasets: [{
+                            fill: false,
+                            label: 'No Mask',
+                            data: [{{ nomask_mon|safe }}, {{ nomask_tue|safe }}, {{ nomask_wed|safe }}, {{ nomask_thu|safe }}, {{ nomask_fri|safe }}, {{ nomask_sat|safe }}, {{ nomask_sun|safe }}],
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.5)',
+
+                            ],
+                            borderColor: [
+                                'rgba(255,99,132,1)',
+                            ],
+
+                            {#label: 'Mask',#}
+                        }, {
+                            fill: false,
+                            label: 'Mask',
+                            data: [{{ mask_mon|safe }}, {{ mask_tue|safe }}, {{ mask_wed }}, {{ mask_thu }}, {{ mask_fri }}, {{ mask_sat }}, {{ mask_sun }}],
+                            backgroundColor: [
+                                'rgba(54, 162, 235, 0.5)',
+                            ],
+                            borderColor: [
+                                'rgba(54, 162, 235, 1)',
+                            ]
+                        },
+                        ],
+
+
+                        labels: [
+                            'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'
+                        ]
+                    },
+                    options: {
+                        scales: {
+                            xAxes: [{
+                                time: {
+                                    min: start,
+                                    max: end,
+                                    unit: "day"
+                                },
+                                barPercentage: 0.4,
+                                ticks: {
+                                    beginAtZero: true,
+                                },
+                                gridLines: {
+                                    display: false
+                                }
+                            }]
+                        },
+                        responsive: true,
+                        legend: {
+                            position: 'top',
+                            display: false // Lable hide krva
+                        },
+                        title: {
+                            display: true,
+                            text: 'Mix Comparison Mask and No Mask Wearing'
+                        }
+                    }
+                };
+
+                var config4 = {
+                    {#horizontalBar#}
+                    type: 'bar',
+                    data: {
+                        datasets: [{
+                            fill: false,
+                            label: 'Social Distancing',
+                            data: [{{ social_mon|safe }}, {{ social_tue|safe }}, {{ social_wed|safe }}, {{ social_thu|safe }}, {{ social_fri|safe }}, {{ social_sat|safe }}, {{ social_sun|safe }}],
+                            backgroundColor: [
+                                'rgba(255, 159, 64, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(207,122,252,0.5)',
+                                'rgba(255, 206, 86, 0.5)',
+                                'rgba(54, 162, 235, 0.5)',
+                                'rgba(75, 192, 192, 0.5)'
+                            ],
+                            borderColor: [
+                                'rgba(255, 159, 64, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(255,99,132,1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(75, 192, 192, 1)'
+                            ],
+
+                            {#label: 'Mask',#}
+                        }],
+
+
+                        labels: [
+                            'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'
+                        ]
+                    },
+                    options: {
+                        scales: {
+                            xAxes: [{
+                                time: {
+                                    min: start,
+                                    max: end,
+                                    unit: "day"
+                                },
+                                barPercentage: 0.4,
+                                ticks: {
+                                    beginAtZero: true,
+                                },
+                                gridLines: {
+                                    display: false
+                                }
+                            }]
+                        },
+                        responsive: true,
+                        legend: {
+                            position: 'top',
+                            display: false // Lable hide krva
+                        },
+                        title: {
+                            display: true,
+                            text: 'Social Distancing Data Per Week'
+                        }
+                    }
+                };
+
+
+                window.onload = function () {
+                    {#var ctx = document.getElementById('pie-chart').getContext('2d');#}
+                    {#window.myPie = new Chart(ctx, config)#}
+
+                    var ctx1 = document.getElementById('bar-mask-chart').getContext('2d');
+                    window.myMaskBar = new Chart(ctx1, config1);
+                    {#myMaskBar.updateDataset();#}
+
+                    var ctx2 = document.getElementById('bar-nomask-chart').getContext('2d');
+                    window.myMaskNoBar = new Chart(ctx2, config2)
+
+                    var ctx3 = document.getElementById('bar-mix-chart').getContext('2d');
+                    window.MyMixBar = new Chart(ctx3, config3)
+
+                    var ctx4 = document.getElementById('bar-social-chart').getContext('2d');
+                    window.mySocial = new Chart(ctx4, config4)
+                };
+
+                {#function updateBarGraph(chart, data) {#}
+                {#    chart.data.datasets.pop();#}
+                {#    chart.data.datasets.push({#}
+                {#        data: data#}
+                {#    });#}
+                {#    chart.update();#}
+                {# }#}
+                {##}
+                {#/*Updating the bar chart with updated data in every second. */#}
+                {#setInterval(function () {#}
+                {#    var ctx1 = document.getElementById('bar-mask-chart').getContext('2d');#}
+                {#    window.myMaskBar = new Chart(ctx1, config1);#}
+                {#    updatedDataSet = [{{ mask_mon|safe }},{{ mask_tue|safe }}, {{ mask_wed }}, {{ mask_thu }}, {{ mask_fri }}, {{ mask_sat }}, {{ mask_sun }}];#}
+                {#    console.log("CSBCB"+{{ mask_wed }})#}
+                {#    updateBarGraph(myMaskBar, updatedDataSet);#}
+                {# }, 2000);#}
+
+
+                {#$(document).ready(#}
+                {#    function () {#}
+                {#        setInterval(function () {#}
+                {#            var someval = Math.floor(Math.random() * 100);#}
+                {#$('#count_refresh').text('Test' + someval);#}
+                {##}
+                {#$('#refresh-div').load(window.location.href + " #refresh-div");#}
+                {#             var ctx1 = document.getElementById('bar-mask-chart').getContext('2d');#}
+                {#             window.myMaskBar = new Chart(ctx1, config1);#}
+                {#             myMaskBar.update();#}
+                {##}
+                {#        }, 5000);  //Delay here = 5 seconds#}
+                {##}
+                {#    });#}
+
+
+            </script>
+
+        </div>
+    </div>
+    <script src="{% static 'vendors/js/vendor.bundle.base.js' %}"></script>
+    <script src="{% static 'vendors/chart.js/Chart.min.js' %}"></script>
+    <script src="{% static 'js/off-canvas.js' %}"></script>
+    <script src="{% static 'js/hoverable-collapse.js' %}"></script>
+    <script src="{% static 'js/misc.js' %}"></script>
+    <script src="{% static 'js/dashboard.js' %}"></script>
+    <script src="{% static 'js/todolist.js' %}"></script>
+</div>
+</body>
+</html>
