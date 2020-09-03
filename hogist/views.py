@@ -6,6 +6,8 @@ from django.contrib import auth, messages
 from django.http import StreamingHttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from requests import Response
+
 from accounts.models import extendUserDetails
 from hogist.models import userIpdetails
 from django.contrib.auth import update_session_auth_hash
@@ -255,8 +257,8 @@ def stream_mask(request):
     # vc = cv2.VideoCapture(BASE_DIR + "/hogist/sample videos/m3.mp4")
 
     # if gpu is available
-    net.setPreferableBackend(cv2.dnn.DNN_BACKEND_CUDA)
-    net.setPreferableTarget(cv2.dnn.DNN_TARGET_CUDA)
+    # net.setPreferableBackend(cv2.dnn.DNN_BACKEND_CUDA)
+    # net.setPreferableTarget(cv2.dnn.DNN_TARGET_CUDA)
 
     model = cv2.dnn_DetectionModel(net)
     model.setInputParams(size=(416, 416), scale=1 / 256)
@@ -456,7 +458,8 @@ def stream_social_dis(request):
 
 @login_required(login_url='login')
 def show_mask_stream(request):
-    return StreamingHttpResponse(stream_mask(request), content_type='multipart/x-mixed-replace; boundary=frame')
+    return Response(stream_mask(request), content_type='multipart/x-mixed-replace; boundary=frame')
+    # return StreamingHttpResponse(stream_mask(request), content_type='multipart/x-mixed-replace; boundary=frame')
 
 
 @login_required(login_url='login')

@@ -119,6 +119,7 @@ def gen(camera):
 @gzip.gzip_page
 def index(request):
     try:
-        return Response(gen(VideoCamera()), content_type="multipart/x-mixed-replace;boundary=frame")
+        return StreamingHttpResponse(gen(VideoCamera()), content_type="multipart/x-mixed-replace;boundary=frame")
+        # return Response(gen(VideoCamera()), content_type="multipart/x-mixed-replace;boundary=frame")
     except HttpResponseServerError as e:
         print("aborted")
