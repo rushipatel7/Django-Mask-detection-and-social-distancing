@@ -1,12 +1,12 @@
 import time
 import cv2
-import imutils
-import numpy as np
-from scipy.spatial import distance as dist
 from django.http import StreamingHttpResponse, HttpResponseServerError
 from django.views.decorators import gzip
 import os
 
+from requests import Response
+
+from hogist import VideoGet
 from hogist.models import userIpdetails
 
 f = userIpdetails.objects.latest('id')
@@ -47,7 +47,8 @@ class VideoCamera(object):
     def __init__(self):
         # # print("SESSS", ip)
         # # self.video = cv2.VideoCapture('http://192.168.0.100:8080/video')
-        self.video = cv2.VideoCapture(path)
+        # self.video = cv2.VideoCapture(path)
+        self.video = VideoGet(path).start()
         # self.video = cv2.VideoCapture(BASE_DIR + "/hogist/sample videos/m1.mp4")
 
         # Define Netgear Server with default parameters
@@ -114,10 +115,10 @@ def gen(camera):
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
 
-    
+
 @gzip.gzip_page
 def index(request):
     try:
-        return StreamingHttpResponse(gen(VideoCamera()), content_type="multipart/x-mixed-replace;boundary=frame")
+        return Response(gen(VideoCamera()), content_type="multipart/x-mixed-replace;boundary=frame")
     except HttpResponseServerError as e:
         print("aborted")
