@@ -6,8 +6,6 @@ from django.contrib import auth, messages
 from django.http import StreamingHttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from requests import Response
-
 from accounts.models import extendUserDetails
 from hogist.models import userIpdetails
 from django.contrib.auth import update_session_auth_hash
@@ -184,7 +182,7 @@ def mask_ip_details(request):
         if get_ip != '':
             request.session['ip_value'] = get_ip
             print("Session", request.session.get('ip_value'))
-            # return redirect('mask')
+            return redirect('mask')
         return render(request, 'mask_detection.html', {'ip': get_ip})
         # return render(request, 'index.html')
 
@@ -458,8 +456,7 @@ def stream_social_dis(request):
 
 @login_required(login_url='login')
 def show_mask_stream(request):
-    return Response(stream_mask(request), content_type='multipart/x-mixed-replace; boundary=frame')
-    # return StreamingHttpResponse(stream_mask(request), content_type='multipart/x-mixed-replace; boundary=frame')
+    return StreamingHttpResponse(stream_mask(request), content_type='multipart/x-mixed-replace; boundary=frame')
 
 
 @login_required(login_url='login')

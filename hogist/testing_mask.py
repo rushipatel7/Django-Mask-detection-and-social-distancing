@@ -114,7 +114,7 @@ def gen(camera):
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
 
-    
+
 @gzip.gzip_page
 def index(request):
     try:
